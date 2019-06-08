@@ -1,4 +1,4 @@
-# HomeAssistant_Jinja_fun
+# HomeAssistant Jinja fun
 Snipets I use all the time, or look for...
 <br>
 <br>
