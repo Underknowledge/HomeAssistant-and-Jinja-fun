@@ -4,7 +4,7 @@
 For the Home Assistant Template editor or Automations/Scripts. 
 </p>
 
-## Basics attribute 
+## Basics attributes 
 `{{states("input_number.cctime")}}` </br>
 or</br>
 `{{ (states("input_number.cctime"))  }}`  all returns `4.0`</br>
@@ -19,4 +19,17 @@ same as above but without error handeling:</br>
 
 `{{ relative_time(states.binary_sensor.mija_door.last_changed) }}` returns `1 hour`
 
-## Setting Variables
+## get all attrbutes of a given entity_id  
+
+```yaml
+% set entity_id = "automation.tasker_hook" %}
+
+{{ entity_id }}
+
+{{ states[entity_id.split('.')[0]] }}
+{{ states[entity_id.split('.')[0]] | list }}
+{{ states[entity_id.split('.')[0]][entity_id.split('.')[1]] }}
+
+{{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes.friendly_name }}
+{{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes["friendly_name"] }}
+``` 
