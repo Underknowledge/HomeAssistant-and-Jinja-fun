@@ -22,6 +22,7 @@ same as above but without error handeling:</br>
 
 ## in the template editor
 
+### Replace
 ```yaml
 {% set my_test_json = {
   "gps": "7.8199286,-122.4782551"
@@ -29,8 +30,15 @@ same as above but without error handeling:</br>
  {{ my_test_json.temperature }} 
 {{ my_test_json.gps | replace(",",":")  }} 
 ```
-
-
+### Split
+```yaml
+{% set my_test_json = {
+  "gps": "7.8199286,-122.4782551"
+} %}
+ {{ my_test_json.temperature }} 
+{{ my_test_json.gps.split(',')[0] }} 
+```
+split(',')[0]
 
 ## get all attrbutes of a given entity_id  
 
