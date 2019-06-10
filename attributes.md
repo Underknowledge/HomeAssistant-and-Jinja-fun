@@ -30,6 +30,9 @@ same as above but without error handeling:</br>
  {{ my_test_json.temperature }} 
 {{ my_test_json.gps | replace(",",":")  }} 
 ```
+ returns `7.8199286:-122.4782551`
+
+
 ### Split
 ```yaml
 {% set my_test_json = {
@@ -38,7 +41,9 @@ same as above but without error handeling:</br>
  {{ my_test_json.temperature }} 
 {{ my_test_json.gps.split(',')[0] }} 
 ```
-split(',')[0]
+ returns `7.8199286`
+
+
 
 ## get all attrbutes of a given entity_id  
 
