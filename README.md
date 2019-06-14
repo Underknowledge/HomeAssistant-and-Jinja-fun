@@ -5,9 +5,9 @@ Snipets I use all the time, or look for...
 VERY deam useful rebo by Skalavala <br>
 https://github.com/skalavala/mysmarthome/blob/master/jinja_helpers/readme.md
 
-
-
-
+</br>
+</br>
+</br>
 
 # Attributes
 
@@ -33,21 +33,6 @@ same as above but without error handeling:</br>
 </br>
 </br>
 </br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # in the template editor
 
