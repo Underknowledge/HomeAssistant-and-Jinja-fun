@@ -30,6 +30,24 @@ same as above but without error handeling:</br>
 
 `{{ relative_time(states.binary_sensor.mija_door.last_changed) }}` returns `1 hour`
 
+</br>
+</br>
+</br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # in the template editor
 
