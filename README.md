@@ -73,3 +73,94 @@ same as above but without error handeling:</br>
 {{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes.friendly_name }}
 {{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes["friendly_name"] }}
 ``` 
+
+
+## cut out the name and capitalize the first letter
+
+{{ 'binary_sensor.waschmaschine_running' | regex_replace('.*\.', '') | regex_replace('_.*', '') | title }}
+
+ returns `Waschmaschine` 
+ 
+ 
+</br>
+</br>
+</br>
+ 
+ # messages
+
+
+## random
+```yaml
+      - service: notify.xyz
+        data_template:
+          message: >-
+                 {{ [
+                 " message 0",
+                 " message 1",
+                 " message 2",
+                 " message 3",
+                 " message 4",
+                 " message 5",
+                 " message 6",
+                 " message 7",
+                 " message 8",
+                 " message 9",
+                 " message 10"
+                 ] | random }}
+```
+
+### output:  </br>  
+
+ returns `message 10`, then  `message 4`, then `message 3`, then `message 10`, then...  </br>  
+
+could be used with `{{now().strftime('%d')}} ` for things like open contests. </br>  
+
+## Keep the style
+
+
+```yaml
+notify:
+- name: logfile
+  platform: file
+  filename: /config/notify.log
+  timestamp: true
+automation:
+  trigger:
+  action:
+    - service: notify.logfile
+      data_template:
+        message: |-
+          ///
+          ///////////////////////////////////
+          /                                 /
+          ///////////////////////////////////
+
+           #     # ####### #     # 
+           #  #  # #     # #  #  # 
+           #  #  # #     # #  #  # 
+           #  #  # #     # #  #  # 
+           #  #  # #     # #  #  # 
+           #  #  # #     # #  #  # 
+            ## ##  #######  ## ##
+
+          /////////////////////////////////////////////////////////////////
+          ////////////////////////////////////////////////////////////////
+
+```
+`  |- ` 
+ 
+ 
+ 
+ 
+ 
+ # Timestamps 
+
+
+## random
+
+
+string from sensor.ups_transfer_to_battery.state:
+`2019-06-12 09:44:56 +0700`
+
+ Convert it to an timestamp and get the relative time:
+`{{ relative_time(strptime(states.sensor.ups_transfer_to_battery.state, '%Y-%m-%d %H:%M:%S %z')) }}` 
