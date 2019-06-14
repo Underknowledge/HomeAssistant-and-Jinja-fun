@@ -60,10 +60,14 @@ same as above but without error handeling:</br>
 
 `(',')[1] }} ` 
  would return `-122.4782551` 
-
-
 </br>
 
+### cut out the name and capitalize the first letter
+
+` {{ 'binary_sensor.waschmaschine_running' | regex_replace('.*\.', '') | regex_replace('_.*', '') | title }} `
+
+ returns `Waschmaschine` 
+</br>
 ### get all attrbutes of a given entity_id  
 
 ```yaml
@@ -80,11 +84,7 @@ same as above but without error handeling:</br>
 ``` 
 
 
-### cut out the name and capitalize the first letter
 
-{{ 'binary_sensor.waschmaschine_running' | regex_replace('.*\.', '') | regex_replace('_.*', '') | title }}
-
- returns `Waschmaschine` 
  
  
 </br>
