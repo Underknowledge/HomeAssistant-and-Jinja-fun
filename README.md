@@ -189,6 +189,7 @@ string from sensor.ups_transfer_to_battery.state:
 `{{ relative_time(strptime(states.sensor.ups_transfer_to_battery.state, '%Y-%m-%d %H:%M:%S %z')) }}` 
 </br>
 </br>
+### timezones
 `| timestamp_custom('%Y-%m-%dT%H:%M:%S', False) }}Z` 
 timestamp_custom also lets you flag if the time is local time or not
 
