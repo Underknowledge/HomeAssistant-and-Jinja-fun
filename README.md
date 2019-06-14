@@ -147,16 +147,34 @@ automation:
           ////////////////////////////////////////////////////////////////
 
 ```
-`  |- ` 
+all done by ` |- ` 
+ renders to 
  
  
+ ``` 
+ ///
+///////////////////////////////////
+/                                 /
+///////////////////////////////////
+ 
+ #     # ####### #     # 
+ #  #  # #     # #  #  # 
+ #  #  # #     # #  #  # 
+ #  #  # #     # #  #  # 
+ #  #  # #     # #  #  # 
+ #  #  # #     # #  #  # 
+  ## ##  #######  ## ##
+ 
+/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////// ``` 
+``` 
  
  
  
  # Timestamps 
 
 
-## random
+## string to stamp
 
 
 string from sensor.ups_transfer_to_battery.state:
@@ -164,3 +182,39 @@ string from sensor.ups_transfer_to_battery.state:
 
  Convert it to an timestamp and get the relative time:
 `{{ relative_time(strptime(states.sensor.ups_transfer_to_battery.state, '%Y-%m-%d %H:%M:%S %z')) }}` 
+
+
+`| timestamp_custom('%Y-%m-%dT%H:%M:%S', False) }}Z` 
+timestamp_custom also lets you flag if the time is local time or not
+
+you can add `}}Z` for the Zulo Timezone `}}L` for Local and so on  
+or 
+`{{ | timestamp_local }}`
+`{{ | timestamp_utc }}`
+`{{ | timestamp_custom('%Y' True) }}`
+
+## Create a timestamp with an automation 
+
+
+```yaml
+automation:
+  - alias: timestamp
+    trigger:
+    action:
+      - service: notify.timestamp
+        data_template:
+          message: "{{ { 'timestamp': now()|string } |tojson }}"
+ 
+sensor:
+  - platform: file
+    name: vit_d3_timestamp
+    file_path: /config/imestamp.txt
+    value_template: '{{value_json.timestamp}}'
+  - platform: template
+    sensors:
+      timestamp_processed:
+        friendly_name: "timestamp"
+        unit_of_measurement: 'days'
+        value_template: "{{ (( as_timestamp(now()) - as_timestamp(strptime(states('sensor.timestamp'), '%d.%m.%Y')) ) / 86400 ) | round(2) }}"
+```
+          
