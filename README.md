@@ -34,9 +34,10 @@ same as above but without error handeling:</br>
 </br>
 </br>
 
-# in the template editor
 
-## Replace
+# Template editor
+
+### Replace
 ```yaml
 {% set my_test_json = {
   "gps": "7.8199286,-122.4782551"
@@ -45,9 +46,9 @@ same as above but without error handeling:</br>
 {{ my_test_json.gps | replace(",",":")  }} 
 ```
  returns `7.8199286:-122.4782551`
+</br>
 
-
-## Split
+### Split
 ```yaml
 {% set my_test_json = {
   "gps": "7.8199286,-122.4782551"
@@ -57,9 +58,13 @@ same as above but without error handeling:</br>
 ```
  returns `7.8199286`
 
+`(',')[1] }} ` 
+ would return `-122.4782551` 
 
 
-## get all attrbutes of a given entity_id  
+</br>
+
+### get all attrbutes of a given entity_id  
 
 ```yaml
 % set entity_id = "automation.tasker_hook" %}
@@ -75,7 +80,7 @@ same as above but without error handeling:</br>
 ``` 
 
 
-## cut out the name and capitalize the first letter
+### cut out the name and capitalize the first letter
 
 {{ 'binary_sensor.waschmaschine_running' | regex_replace('.*\.', '') | regex_replace('_.*', '') | title }}
 
@@ -87,7 +92,7 @@ same as above but without error handeling:</br>
 </br>
  
  # messages
-
+</br>
 
 ## random
 ```yaml
@@ -110,12 +115,12 @@ same as above but without error handeling:</br>
 ```
 
 ### output:  </br>  
-
+</br>
  returns `message 10`, then  `message 4`, then `message 3`, then `message 10`, then...  </br>  
 
 could be used with `{{now().strftime('%d')}} ` for things like open contests. </br>  
-
-## Keep the style
+</br></br>
+### Keep the style
 
 
 ```yaml
@@ -168,13 +173,13 @@ all done by ` |- `
 /////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////// ``` 
 ``` 
- 
- 
+ </br>
+ </br>
  
  # Timestamps 
 
 
-## string to stamp
+### string to stamp
 
 
 string from sensor.ups_transfer_to_battery.state:
@@ -193,7 +198,7 @@ or
 `{{ | timestamp_utc }}`
 `{{ | timestamp_custom('%Y' True) }}`
 
-## Create a timestamp with an automation 
+### Create a timestamp with an automation 
 
 
 ```yaml
