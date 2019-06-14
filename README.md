@@ -184,11 +184,11 @@ all done by ` |- `
 
 string from sensor.ups_transfer_to_battery.state:
 `2019-06-12 09:44:56 +0700`
-
+</br>
  Convert it to an timestamp and get the relative time:
 `{{ relative_time(strptime(states.sensor.ups_transfer_to_battery.state, '%Y-%m-%d %H:%M:%S %z')) }}` 
-
-
+</br>
+</br>
 `| timestamp_custom('%Y-%m-%dT%H:%M:%S', False) }}Z` 
 timestamp_custom also lets you flag if the time is local time or not
 
@@ -197,7 +197,7 @@ or
 `{{ | timestamp_local }}`
 `{{ | timestamp_utc }}`
 `{{ | timestamp_custom('%Y' True) }}`
-
+</br>
 ### Create a timestamp with an automation 
 
 
