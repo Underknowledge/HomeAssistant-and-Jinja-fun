@@ -2,7 +2,7 @@
 
 `RASPBIAN`
 =======
-***TL;DR***: just stuff and testing markdown.Maybe even usefull infos in here 
+***TL;DR***: just stuff and testing markdown.Maybe even useful infos in here 
 
 <br>
 <br>
