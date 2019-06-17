@@ -193,9 +193,7 @@ string from sensor.ups_transfer_to_battery.state:
 `| timestamp_custom('%Y-%m-%dT%H:%M:%S', False) }}Z` 
 timestamp_custom also lets you flag if the time is local time or not
 
-you can add `}}Z` for the Zulo Timezone `}}L` for Local and so on  
-or 
-`{{ | timestamp_local }}`
+you can add `{{ | timestamp_local }}` for Local or 
 `{{ | timestamp_utc }}`
 `{{ | timestamp_custom('%Y' True) }}`
 </br>
