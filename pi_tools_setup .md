@@ -9,6 +9,18 @@
 
 https://github.com/andrewjfreyer/monitor/
 
+
+
+after installing 
+`sudo nano /etc/systemd/system/monitor.service` and in the 7th line 
+
+
+`ExecStart=/bin/bash /home/pi/monitor/monitor.sh -b -x  & `
+
+` -b`  for Beacon support and ` -x` for retained MQTT messages
+
+
+
 https://github.com/andrewjfreyer/monitor/#setup-monitor
 
 
