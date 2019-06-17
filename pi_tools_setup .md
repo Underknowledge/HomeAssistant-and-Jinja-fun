@@ -5,6 +5,17 @@
 ***TL;DR***: just stuff and testing markdown.Maybe even usefull infos in here 
 
 
+<details><summary><b>Andrewj freyer's Monitor.sh </b></summary>
+
+https://github.com/andrewjfreyer/monitor/
+
+https://github.com/andrewjfreyer/monitor/#setup-monitor
+
+
+
+</details>
+
+
 <details><summary><b>Billw2's rpi-clone </b></summary>
 
 
@@ -20,6 +31,8 @@
   (fyi: lsblk stands for list all block devices)
 
 </details>
+
+
 <br>
 
 <details><summary><b>Raspberry Pi Wireless Set Up</b></summary>
