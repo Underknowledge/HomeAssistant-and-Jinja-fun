@@ -11,23 +11,31 @@ automation:
         id: "{{ trigger.webhook_id }}"
         trigger: "{{ trigger.json.trigger }}"
         trigger2: "{{ trigger.json.trigger2 }}"
+        trigger3: "{{ trigger.json.trigger3 }}"
+        nfc_present: "{{ trigger.json.nfc_present }}"
+        nfc_id: "{{ trigger.json.nfc_id }}"
+        nfc_payload: "{{ trigger.json.nfc_payload }}"
         update_ot: "{{ trigger.json.update_ot }}"
         who: "{{ trigger.json.who }}"
         dev_id: "{{ trigger.json.dev_id }}"
         device: "{{ trigger.json.device }}"
         what: "{{ trigger.json.what }}"
         when: "{{ trigger.json.when }}"
+
         where_n: "{{ trigger.json.where_n }}"
         lat_n: "{{ trigger.json.where_n.split(',')[0]  }}"
         long_n: "{{ trigger.json.where_n.split(',')[1]  }}"
         acc_n: "{{ trigger.json.acc_n }}"
+
         g_status: "{{ trigger.json.g_status }}"
         where_g: "{{ trigger.json.where_g }}"
         lat_g: "{{ trigger.json.where_g.split(',')[0] }}"
         long_g: "{{ trigger.json.where_g.split(',')[1] }}"
+
         acc_g: "{{ trigger.json.acc_g }}"
         alt_g: "{{ trigger.json.alt_g }}"
         vel_g: "{{ trigger.json.vel_g }} "  
+
         battery: "{{ trigger.json.battery }}"
         ip: "{{ trigger.json.ip }}"
         service: "{{ trigger.json.service }}"
@@ -55,7 +63,9 @@ automation:
         tasker_caller: "{{ trigger.json.tasker_caller }}"
         err: "{{ trigger.json.err }}"
         errmsg: "{{ trigger.json.errmsg }}"
-
+        
+        
+#not updated up to line 128    
     - service: notify.logfile
       data_template:
         message: |-
@@ -117,13 +127,11 @@ automation:
           ////////////////////////////////////////////////////////////////
 
 
-- initial_state: 'on'
-  alias: 'Tasker lv2'
+# no inital state to turn the automation on and off
+- alias: 'Tasker lv2'
   trigger:
     - platform: event
       event_type: tasker_webhook
-      event_data:
-        update_ot: t
   action:
     - service: notify.logfile
       data_template:
@@ -134,6 +142,10 @@ automation:
           /////////////////////////////////// 
           trigger      {{ trigger.event.data.trigger }}          
           trigger2     {{ trigger.event.data.trigger2 }}  
+          trigger3     {{ trigger.event.data.trigger3 }}  
+          nfc_present {{ trigger.event.data.nfc_present }}
+          nfc_id       {{ trigger.event.data.nfc_id }}
+          nfc_payload {{ trigger.event.data.nfc_payload }}
           update_ot    {{ trigger.event.data.update_ot }}       
           who          {{ trigger.event.data.who }}
           dev_id       {{ trigger.event.data.dev_id }}
@@ -187,6 +199,7 @@ automation:
           /////////////////////////////////////////////////////////////////
           ////////////////////////////////////////////////////////////////
 
+
     - service: input_text.set_value
       data_template:
         entity_id: "input_text.{{ trigger.event.data.device }}_ip"
@@ -199,18 +212,6 @@ automation:
           - "{{ trigger.event.data.long_n |float }}"
         gps_accuracy: "{{ trigger.event.data.acc_n |int }}"
         battery: "{{ trigger.event.data.battery }}"
-
-
-- initial_state: 'on'
-  alias: 'Tasker lv2 door'
-  trigger:
-    - platform: event
-      event_type: tasker_webhook
-      event_data:
-        what: openthefrontdoor
-  action:
-    - service: script.turn_on
-      entity_id: script.tueroeffner
 
 
 
@@ -283,6 +284,38 @@ automation:
           
           /////////////////////////////////////////////////////////////////
           ////////////////////////////////////////////////////////////////
+
+
+- initial_state: 'on'
+  alias: 'Tasker door'
+  trigger:
+    - platform: event
+      event_type: tasker_webhook
+      event_data:
+        what: openthefrontdoor
+  action:
+    - service: script.turn_on
+      entity_id: script.tueroeffner
+
+
+- initial_state: 'on'
+  alias: 'Tasker switch'
+  trigger:
+    - platform: event
+      event_type: tasker_webhook
+      event_data:
+        trigger: switch
+  action:
+    - service_template: "switch.turn_{{ trigger.event.data.trigger2 }}"
+      data_template:
+        entity_id: "switch.{{ trigger.event.data.trigger3 }}"
+
+
+
+
+
+
+
 
 input_text:
   op5_ip:
