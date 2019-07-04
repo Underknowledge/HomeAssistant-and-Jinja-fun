@@ -221,4 +221,4 @@ sensor:
         unit_of_measurement: 'days'
         value_template: "{{ (( as_timestamp(now()) - as_timestamp(strptime(states('sensor.timestamp'), '%d.%m.%Y')) ) / 86400 ) | round(2) }}"
 ```
-          
+When you got already a timestamp you can use it like ` state_attr('input_datetime.date_time','timestamp'))` ` 
