@@ -1,8 +1,8 @@
 
 
 hassio
-
-'$ hassio ha update --version 0.XX.X'
+```
+'$ hassio ha update --version 0.XX.X' ```
 
 
 venv 
