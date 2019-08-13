@@ -176,8 +176,48 @@ all done by ` |- `
  </br>
  </br>
  
+ 
+
+ 
  # Timestamps 
 
+
+
+```yaml
+# https://community.home-assistant.io/t/template-time/131509/2?u=underknowledge
+---
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+
+  - platform: template
+    sensors:
+      turni_data:
+        friendly_name: "Data calendario turni"
+        entity_id: sensor.date
+        value_template: 
+          # Gets your timestamp string attribute and sets it equal to tstring
+          {% set tstring = state_attr('calendar.turni', 'start_time') %}
+          # Gets the timezone you are currently in.  Makes it a string.
+          {% set tz = now().timestamp() | timestamp_custom('%z') %}
+          # Converts string+timezone into a datetime object.
+          {% set date = strptime(tstring+tz, '%Y-%m-%d %H:%M:%S%z') %}
+          # subtracts the current date from the timestamp date.  Then gets the number of days.
+          {% set change = (date - now()).days %}
+          # If the number of days are zero...
+          {% if change == 0 %}
+            # show today.
+            Today
+          # If the number of days are 1
+          {% elif change == 1 %}
+            # show tomorrow
+            Tomorrow
+          {% else %}
+            # otherwise show date.
+            {{ date.timestamp() | timestamp_custom('%A %d') }}
+          {% endif %}
+``` 
 
 ### string to stamp
 
