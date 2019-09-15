@@ -82,8 +82,22 @@ same as above but without error handeling:</br>
 {{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes.friendly_name }}
 {{ (states[entity_id.split('.')[0]][entity_id.split('.')[1]]).attributes["friendly_name"] }}
 ``` 
+</br>
 
+### Wich user changed the light?  
 
+```yaml
+# by Ludeeus https://discordapp.com/channels/330944238910963714/330944238910963714/622811187964280832
+{{ states.light.nachttisch.context }}
+
+{%- set changed_by_id = states.light.nachttisch.context.user_id -%}
+{%- for user in states.person -%}
+ {%- if changed_by_id == state_attr(user.entity_id, 'user_id') -%}
+  State changed by: {{ state_attr(user.entity_id, 'friendly_name') }}
+  {%- endif -%}
+{%- endfor -%}
+``` 
+ returns `State changed by: XY` 
 
  
  
