@@ -99,6 +99,21 @@ same as above but without error handeling:</br>
 ``` 
  returns `State changed by: XY` 
 
+### loop through a list, and break out of the loop
+
+```yaml
+# by Ludeeus https://discordapp.com/channels/330944238910963714/330944238910963714/630423692635013141
+{% set break = namespace(active=False) %}
+{% for state in states.binary_sensor if not break.active %}
+  {% if state.state == "on" %}
+    {{ state.entity_id}}
+    {% set break.active = True %}
+  {% endif%}
+{% endfor %}
+
+``` 
+
+
  
  
 </br>
