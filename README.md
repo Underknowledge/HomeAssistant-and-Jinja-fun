@@ -84,6 +84,37 @@ same as above but without error handeling:</br>
 ``` 
 </br>
 
+
+Of an domain:
+```yaml
+{% for state in states.zone -%}
+  {{ state.entity_id }}:
+
+ {{state.attributes}}
+{% endfor %}
+
+``` 
+templating out of these propertys
+```yaml
+{% for zone in states.zone -%}
+- name: {{ state_attr(zone.entity_id, 'friendly_name') }}
+  latitude: {{ state_attr(zone.entity_id, 'latitude') }}
+  longitude: {{ state_attr(zone.entity_id, 'longitude') }}
+  radius: {{ state_attr(zone.entity_id, 'radius') }}
+{{ '\n' -}} 
+{%- endfor %}
+
+#by ludeeus:
+{%- for state in states.zone -%}
+- name: {{ state_attr(state.entity_id, 'friendly_name') }}
+ {%- for attr in ["latitude", "longitude", "radius", "icon"] %}
+  {{attr}}: {{ state_attr(state.entity_id, attr) }}
+ {%- endfor %}
+{% endfor -%}
+
+``` 
+
+
 ### Wich user changed the light?  
 
 ```yaml
