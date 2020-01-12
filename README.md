@@ -322,3 +322,34 @@ sensor:
         value_template: "{{ (( as_timestamp(now()) - as_timestamp(strptime(states('sensor.timestamp'), '%d.%m.%Y')) ) / 86400 ) | round(2) }}"
 ```
 When you got already a timestamp you can use it like ` state_attr('input_datetime.date_time','timestamp'))` ` 
+
+ # Time II
+
+```yaml
+---
+sensor:
+  - platform: time_date
+    display_options:
+      - 'time'
+
+  - platform: template
+    sensors:
+      turni_data:
+        friendly_name: ""
+        entity_id: sensor.time
+        value_template: 
+          {% if (states('sensor.time') > '00:01') and (states('sensor.time') < '05:00') %}
+            night
+          {% elif (states('sensor.time') > '05:01') and (states('sensor.time') < '06:00') %}
+            morning
+          {% elif (states('sensor.time') > '06:01') and (states('sensor.time') < '17:00') %}
+            day
+          {% elif (states('sensor.time') > '17:01') and (states('sensor.time') < '22:00') %}
+            evening
+          {% elif (states('sensor.time') > '22:01') and (states('sensor.time') < '23:59') %}
+            night
+          {% else %}
+            day
+          {% endif %}
+
+``` 
