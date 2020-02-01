@@ -66,6 +66,10 @@ same as above but without error handeling:</br>
 
 ` {{ 'binary_sensor.waschmaschine_running' | regex_replace('.*\.', '') | regex_replace('_.*', '') | title }} `
 
+### cut out the new line 
+`"{{something['somethingRece ived'].replace('\n', ''}}" `
+
+
  returns `Waschmaschine` 
 </br>
 ### get all attrbutes of a given entity_id  
