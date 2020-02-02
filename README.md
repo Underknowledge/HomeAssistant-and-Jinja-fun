@@ -281,6 +281,34 @@ sensor:
             # otherwise show date.
             {{ date.timestamp() | timestamp_custom('%A %d') }}
           {% endif %}
+          
+# from nfgCodex shared in discord (works well as template too
+  - type: entities
+    entities:
+      - type: custom:template-entity-row
+        entity: input_boolean.cam_motion_front_door
+        icon: mdi:eye
+        name: "Motion was last detected:"
+        secondary: >
+          {%- macro formatvalue(name, value, sep='') -%}
+            {%- set name = '{}s'.format(name) if value > 1 else name -%}
+            {{ '{} {}{}'.format(value, name, sep) if value >= 1 else '' }}
+          {%- endmacro -%}
+
+          {%- macro buildTimestamp(timeStamp) -%}
+            {%- set time = ((as_timestamp(now()) - as_timestamp(timeStamp))) -%}
+            {%- set seconds = formatvalue('second', ((time % 3600) % 60) | round(0), '') -%}
+            {%- set minutes = formatvalue('minute', ((time % 3600) // 60) | int, '') -%}
+            {%- set hours = formatvalue('hour', ((time % 86400) // 3600) | int, ', ') -%}
+            {%- set days = formatvalue('day', (time // 86400) | int, ', ') -%}
+            {{ 'Just now' if time < 1 else days + hours + minutes + seconds + ' ago' }}
+          {%- endmacro -%}
+
+          {{ buildTimestamp(states.input_boolean.cam_motion_front_door.last_changed) }}
+
+
+
+          
 ``` 
 
 ### string to stamp
