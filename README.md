@@ -282,7 +282,7 @@ sensor:
             {{ date.timestamp() | timestamp_custom('%A %d') }}
           {% endif %}
           
-# from nfgCodex shared in discord (works well as template too
+# from nfgCodex shared in discord (works well as template too)
   - type: entities
     entities:
       - type: custom:template-entity-row
